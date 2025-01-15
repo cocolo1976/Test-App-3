@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+@{
+    string absoluteLinkURL = string.Empty;
+    IEnumerable<KeyValuePair<string, string>> findReplaceResources = null;
+    if (Request.IsLocal && HttpContext.Current.IsDebuggingEnabled)
+    {
+        absoluteLinkURL = "//www.fairfaxcounty.gov";
+        findReplaceResources = new Dictionary<string, string> {
+            { "\\s+src=\"(/resources/[^\"]+)\"", " src=\"//www.fairfaxcounty.gov$1\"" }
+        };
+    }
+}<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@(ViewBag.Title == null ? "JCAS_Public_MVC" : ViewBag.Title)</title>
+    <link rel="icon" href="@(absoluteLinkURL)/resources/public/wcm17/images/favicon.ico" />
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto">
+    <link rel="stylesheet" type="text/css" href="@(absoluteLinkURL)/resources/public/wcm17/css/custom.css" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="@(absoluteLinkURL)/resources/public/wcm17/css/ie10-viewport-bug-workaround.css" />
+    <link rel="stylesheet" type="text/css" href="@(absoluteLinkURL)/resources/public/wcm17/css/styles.css" />
+    @Styles.Render("~/Content/site")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="@(absoluteLinkURL)/resources/public/wcm17/js/mega-menu.js"></script>
+    <script type="text/javascript" src="@(absoluteLinkURL)/resources/public/wcm17/js/tabs.js"></script>
+    <script type="text/javascript" src="@(absoluteLinkURL)/resources/public/wcm17/js/application.js"></script>
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- HEADER -->
+    @Html.RenderInclude(absoluteLinkURL + "/resources/public/wcm17/includes/" + (Constants.Headerfull ? "headerdotnet.inc" : "headerdotnetMin.inc"), findReplace: findReplaceResources)
+    <div class="pagecontent">
+        @if (Constants.UseAppBreadcrumb)
+        {
+            @Html.Partial("_AppBreadcrumbPartial")
+        }
+        @* pick container or container-fluid, keep application-body-content as-is *@
+        <div class="container-fluid application-body-content">
+            @RenderBody()
+        </div>
+    </div>
+    <!-- FOOTER -->
+    @Html.RenderInclude(absoluteLinkURL + "/resources/public/wcm17/includes/footerdotnet.inc", findReplace: findReplaceResources)
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@media all and (max-width:1100px) {
+    .fairfax-app-sidebar-navbar-collapse .nav .open > a, .fairfax-app-sidebar-navbar-collapse .nav .open > a:focus, .fairfax-app-sidebar-navbar-collapse .nav .open > a:hover {
+        color: white !important;
+    }
+
+    .fairfax-app-sidebar-navbar-collapse li > a, .fairfax-app-sidebar-navbar-collapse li > a:focus, .fairfax-app-sidebar-navbar-collapse li > a:hover {
+        color: white !important;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .fairfax-breadcrumb {
+        display: block;
+    }
+}
+
+a.schedule, a.schedule:link, a.schedule:visited, a.schedule:active {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.schedule:hover {
+    color: green;
+    text-decoration: underline;
+}
+
+a.unschedule, a.unschedule:link, a.unschedule:visited, a.unschedule:active {
+    color: darkred;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.unschedule:hover {
+    color: darkred;
+    text-decoration: underline;
+}

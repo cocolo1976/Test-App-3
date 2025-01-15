@@ -1,0 +1,56 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasSetting
+
+@{
+    ViewBag.Title = "Edit Setting";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.SettingDataType)
+    @Html.HiddenFor(model => model.SettingName)
+    @Html.HiddenFor(model => model.SettingLabelText)
+    @Html.HiddenFor(model => model.SettingMaxLength)
+    @Html.HiddenFor(model => model.SettingRequired)
+    @Html.HiddenFor(model => model.SettingTooltip)
+    @Html.HiddenFor(model => model.SettingOrder)
+    @Html.HiddenFor(model => model.SettingVisible)
+    @Html.HiddenFor(model => model.RowVersionId)
+
+    <div class="form-group">
+        @Html.Label("Setting Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.SettingName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Setting Label Text", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.SettingLabelText, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Setting Value *", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SettingValue, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SettingValue, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+

@@ -1,0 +1,28 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.ViewModels.SessionContainerModel
+@{
+    ViewBag.Title = "Unschedule a Session";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+        @Html.Partial("_SessionDetails", Model)
+    }
+    else
+    {
+        <h3>Are you sure you want to unschedule the attorney from this session?</h3>
+        @Html.Partial("_SessionDetails", Model)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Unschedule" class="btn btn-default" />
+            </div>
+        </div>
+    }
+}
+@Html.ActionLink("Back to Calendar", "Calendar", new { selectedMonth = ViewBag.SelectedMonth })
+
+

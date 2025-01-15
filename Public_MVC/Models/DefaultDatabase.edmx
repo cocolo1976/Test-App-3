@@ -1,0 +1,1228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JcasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="JcasAttorney">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="BarNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="LawFirmName" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="varbinary(max)" />
+          <Property Name="PasswordExpires" Type="date" />
+          <Property Name="FailedLoginAttempts" Type="int" Nullable="false" />
+          <Property Name="LastPasswordChange" Type="date" />
+          <Property Name="EmailIsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="EmailConfirmationCode" Type="varbinary(max)" />
+          <Property Name="EmailConfirmationExpires" Type="datetime" />
+          <Property Name="FullName" Type="varchar" MaxLength="152" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasAttorneyHearingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttorneyId" Type="int" Nullable="false" />
+          <Property Name="HearingTypeId" Type="int" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasCourtClosed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourtClosedDate" Type="date" Nullable="false" />
+          <Property Name="CourtClosedReason" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasCourtDateNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasCourtroom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Courtroom" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasDateType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaximumSequence" Type="int" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DescriptionText" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasHearingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HearingTypeCode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="HearingTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasHoliday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="HolidayStart" Type="date" Nullable="false" />
+          <Property Name="YearRepeat" Type="int" Nullable="false" />
+          <Property Name="HolidayMonth" Type="int" Nullable="false" />
+          <Property Name="SpecificDay" Type="int" />
+          <Property Name="SpecificWeekday" Type="int" />
+          <Property Name="SpecificWeekdaySequence" Type="int" />
+          <Property Name="SundayMove" Type="int" Nullable="false" />
+          <Property Name="SaturdayMove" Type="int" Nullable="false" />
+          <Property Name="HolidayDays" Type="int" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableId" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ColumnId" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="RowId" Type="int" Nullable="false" />
+          <Property Name="NewValue" Type="varchar" MaxLength="2000" />
+          <Property Name="LogAction" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="LogDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageText" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="DisplayAsError" Type="bit" Nullable="false" />
+          <Property Name="ApplicationAvailable" Type="bit" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ReportDescription" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="ReportParameter" Type="varchar" MaxLength="200" />
+          <Property Name="UserGroup" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasRule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RuleName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RuleDescription" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="SubmitFromDateTypeId" Type="int" Nullable="false" />
+          <Property Name="SubmitFromSequence" Type="int" Nullable="false" />
+          <Property Name="SubmitToDateTypeId" Type="int" Nullable="false" />
+          <Property Name="SubmitToSequence" Type="int" Nullable="false" />
+          <Property Name="SessionMonthSequence" Type="int" Nullable="false" />
+          <Property Name="SessionFromDateTypeId" Type="int" Nullable="false" />
+          <Property Name="SessionFromSequence" Type="int" Nullable="false" />
+          <Property Name="SessionToDateTypeId" Type="int" Nullable="false" />
+          <Property Name="SessionToSequence" Type="int" Nullable="false" />
+          <Property Name="HearingTypeCount" Type="int" Nullable="false" />
+          <Property Name="UserGroup" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionDate" Type="date" Nullable="false" />
+          <Property Name="AttorneyId" Type="int" />
+          <Property Name="HearingTypeId" Type="int" Nullable="false" />
+          <Property Name="CourtroomId" Type="int" />
+          <Property Name="SubmittedDate" Type="date" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasSessionRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="AttorneyId" Type="int" Nullable="false" />
+          <Property Name="CourtroomId" Type="int" Nullable="false" />
+          <Property Name="SubmittedDate" Type="date" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingValue" Type="varchar(max)" />
+          <Property Name="SettingLabelText" Type="varchar" MaxLength="50" />
+          <Property Name="SettingDataType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingMaxLength" Type="int" Nullable="false" />
+          <Property Name="SettingRequired" Type="bit" Nullable="false" />
+          <Property Name="SettingTooltip" Type="varchar" MaxLength="300" />
+          <Property Name="SettingOrder" Type="int" Nullable="false" />
+          <Property Name="SettingVisible" Type="bit" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JcasUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLoginId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRole" Type="varchar" MaxLength="50" />
+          <Property Name="UserLoginIdUpdate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RowVersionId" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id">
+          <End Role="JcasAttorney" Type="Self.JcasAttorney" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JcasAttorneyHearingType" Type="Self.JcasAttorneyHearingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasAttorney">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasAttorneyHearingType">
+              <PropertyRef Name="AttorneyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id">
+          <End Role="JcasHearingType" Type="Self.JcasHearingType" Multiplicity="1" />
+          <End Role="JcasAttorneyHearingType" Type="Self.JcasAttorneyHearingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasHearingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasAttorneyHearingType">
+              <PropertyRef Name="HearingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id">
+          <End Role="JcasDateType" Type="Self.JcasDateType" Multiplicity="1" />
+          <End Role="JcasRule" Type="Self.JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SessionFromDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SessionToDateTypeId_JcasDateType_Id">
+          <End Role="JcasDateType" Type="Self.JcasDateType" Multiplicity="1" />
+          <End Role="JcasRule" Type="Self.JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SessionToDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id">
+          <End Role="JcasDateType" Type="Self.JcasDateType" Multiplicity="1" />
+          <End Role="JcasRule" Type="Self.JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SubmitFromDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id">
+          <End Role="JcasDateType" Type="Self.JcasDateType" Multiplicity="1" />
+          <End Role="JcasRule" Type="Self.JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SubmitToDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JcasSessionRequest_SessionId_JcasSession_Id_FK">
+          <End Role="JcasSession" Type="Self.JcasSession" Multiplicity="1" />
+          <End Role="JcasSessionRequest" Type="Self.JcasSessionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasSession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasSessionRequest">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pJcasHolidayInsertNextYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserLoginIdUpdate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pJcasSessionGetCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AttorneyId" Type="int" Mode="In" />
+          <Parameter Name="SessionMonth" Type="date" Mode="In" />
+        </Function>
+        <Function Name="pJcasSessionInsertNextYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserLoginIdUpdate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="rAttorneyCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AttorneyId" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="ToDate" Type="date" Mode="In" />
+          <Parameter Name="ReportHtml" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="rAttorneySchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AttorneyId" Type="int" Mode="In" />
+          <Parameter Name="ReportHtml" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="rCourtCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="ToDate" Type="date" Mode="In" />
+          <Parameter Name="ReportHtml" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="JcasModelStoreContainer">
+          <EntitySet Name="JcasAttorney" EntityType="Self.JcasAttorney" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasAttorneyHearingType" EntityType="Self.JcasAttorneyHearingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasCourtClosed" EntityType="Self.JcasCourtClosed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasCourtDateNote" EntityType="Self.JcasCourtDateNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasCourtroom" EntityType="Self.JcasCourtroom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasDateType" EntityType="Self.JcasDateType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasDescription" EntityType="Self.JcasDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasHearingType" EntityType="Self.JcasHearingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasHoliday" EntityType="Self.JcasHoliday" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasLog" EntityType="Self.JcasLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasMessage" EntityType="Self.JcasMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasReport" EntityType="Self.JcasReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasRule" EntityType="Self.JcasRule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasSession" EntityType="Self.JcasSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasSessionRequest" EntityType="Self.JcasSessionRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasSetting" EntityType="Self.JcasSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JcasUser" EntityType="Self.JcasUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id" Association="Self.fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id">
+            <End Role="JcasAttorney" EntitySet="JcasAttorney" />
+            <End Role="JcasAttorneyHearingType" EntitySet="JcasAttorneyHearingType" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id" Association="Self.fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id">
+            <End Role="JcasHearingType" EntitySet="JcasHearingType" />
+            <End Role="JcasAttorneyHearingType" EntitySet="JcasAttorneyHearingType" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id" Association="Self.fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateType" />
+            <End Role="JcasRule" EntitySet="JcasRule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SessionToDateTypeId_JcasDateType_Id" Association="Self.fk_JcasRule_SessionToDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateType" />
+            <End Role="JcasRule" EntitySet="JcasRule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id" Association="Self.fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateType" />
+            <End Role="JcasRule" EntitySet="JcasRule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id" Association="Self.fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateType" />
+            <End Role="JcasRule" EntitySet="JcasRule" />
+          </AssociationSet>
+          <AssociationSet Name="JcasSessionRequest_SessionId_JcasSession_Id_FK" Association="Self.JcasSessionRequest_SessionId_JcasSession_Id_FK">
+            <End Role="JcasSession" EntitySet="JcasSession" />
+            <End Role="JcasSessionRequest" EntitySet="JcasSessionRequest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JcasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="JcasEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="pJcasAttorneyUpdate">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="MiddleName" Mode="In" Type="String" />
+            <Parameter Name="BarNumber" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="LawFirmName" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="AttorneyHearingTypes" Mode="In" Type="String" />
+            <Parameter Name="UserLoginIdUpdate" Mode="In" Type="String" />
+            <Parameter Name="RowVersionId" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <EntitySet Name="JcasAttorneys" EntityType="JcasModel.JcasAttorney" />
+          <EntitySet Name="JcasAttorneyHearingTypes" EntityType="JcasModel.JcasAttorneyHearingType" />
+          <EntitySet Name="JcasCourtCloseds" EntityType="JcasModel.JcasCourtClosed" />
+          <EntitySet Name="JcasCourtrooms" EntityType="JcasModel.JcasCourtroom" />
+          <EntitySet Name="JcasDateTypes" EntityType="JcasModel.JcasDateType" />
+          <EntitySet Name="JcasDescriptions" EntityType="JcasModel.JcasDescription" />
+          <EntitySet Name="JcasHearingTypes" EntityType="JcasModel.JcasHearingType" />
+          <EntitySet Name="JcasHolidays" EntityType="JcasModel.JcasHoliday" />
+          <EntitySet Name="JcasLogs" EntityType="JcasModel.JcasLog" />
+          <EntitySet Name="JcasMessages" EntityType="JcasModel.JcasMessage" />
+          <EntitySet Name="JcasRules" EntityType="JcasModel.JcasRule" />
+          <EntitySet Name="JcasSessions" EntityType="JcasModel.JcasSession" />
+          <EntitySet Name="JcasSettings" EntityType="JcasModel.JcasSetting" />
+          <EntitySet Name="JcasUsers" EntityType="JcasModel.JcasUser" />
+          <AssociationSet Name="fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id" Association="JcasModel.fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id">
+            <End Role="JcasAttorney" EntitySet="JcasAttorneys" />
+            <End Role="JcasAttorneyHearingType" EntitySet="JcasAttorneyHearingTypes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasSession_AttorneyId_JcasAttorney_Id" Association="JcasModel.fk_JcasSession_AttorneyId_JcasAttorney_Id">
+            <End Role="JcasAttorney" EntitySet="JcasAttorneys" />
+            <End Role="JcasSession" EntitySet="JcasSessions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id" Association="JcasModel.fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id">
+            <End Role="JcasHearingType" EntitySet="JcasHearingTypes" />
+            <End Role="JcasAttorneyHearingType" EntitySet="JcasAttorneyHearingTypes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasSession_CourtroomId_JcasCourtroom_Id" Association="JcasModel.fk_JcasSession_CourtroomId_JcasCourtroom_Id">
+            <End Role="JcasCourtroom" EntitySet="JcasCourtrooms" />
+            <End Role="JcasSession" EntitySet="JcasSessions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id" Association="JcasModel.fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateTypes" />
+            <End Role="JcasRule" EntitySet="JcasRules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id" Association="JcasModel.fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateTypes" />
+            <End Role="JcasRule" EntitySet="JcasRules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id" Association="JcasModel.fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateTypes" />
+            <End Role="JcasRule" EntitySet="JcasRules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasRule_SessionToDateTypeId_JcasDateType_Id" Association="JcasModel.fk_JcasRule_SessionToDateTypeId_JcasDateType_Id">
+            <End Role="JcasDateType" EntitySet="JcasDateTypes" />
+            <End Role="JcasRule" EntitySet="JcasRules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_JcasSession_HearingTypeId_JcasHearingType_Id" Association="JcasModel.fk_JcasSession_HearingTypeId_JcasHearingType_Id">
+            <End Role="JcasHearingType" EntitySet="JcasHearingTypes" />
+            <End Role="JcasSession" EntitySet="JcasSessions" />
+          </AssociationSet>
+          <FunctionImport Name="pJcasHolidayInsertNextYear">
+          <Parameter Name="UserLoginIdUpdate" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="JcasReports" EntityType="JcasModel.JcasReport" />
+          <FunctionImport Name="pJcasSessionInsertNextYear">
+          <Parameter Name="UserLoginIdUpdate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pJcasSessionGetCalendar" ReturnType="Collection(JcasModel.pJcasSessionGetCalendar_Result4)">
+            <Parameter Name="AttorneyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionMonth" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rAttorneyCalendar">
+            <Parameter Name="AttorneyId" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ReportHtml" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rAttorneySchedule">
+            <Parameter Name="AttorneyId" Mode="In" Type="Int32" />
+            <Parameter Name="ReportHtml" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rCourtCalendar">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ReportHtml" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="JcasCourtDateNotes" EntityType="JcasModel.JcasCourtDateNote" />
+          <EntitySet Name="JcasSessionRequests" EntityType="JcasModel.JcasSessionRequest" />
+          <AssociationSet Name="JcasSessionRequest_SessionId_JcasSession_Id_FK" Association="JcasModel.JcasSessionRequest_SessionId_JcasSession_Id_FK">
+            <End Role="JcasSession" EntitySet="JcasSessions" />
+            <End Role="JcasSessionRequest" EntitySet="JcasSessionRequests" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="JcasAttorney">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BarNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PasswordExpires" Type="DateTime" Precision="0" />
+          <Property Name="FailedLoginAttempts" Type="Int32" Nullable="false" />
+          <Property Name="LastPasswordChange" Type="DateTime" Precision="0" />
+          <Property Name="EmailIsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="EmailConfirmationCode" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EmailConfirmationExpires" Type="DateTime" Precision="3" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasAttorneyHearingTypes" Relationship="JcasModel.fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id" FromRole="JcasAttorney" ToRole="JcasAttorneyHearingType" />
+          <NavigationProperty Name="JcasSessions" Relationship="JcasModel.fk_JcasSession_AttorneyId_JcasAttorney_Id" FromRole="JcasAttorney" ToRole="JcasSession" />
+          <Property Name="LawFirmName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JcasAttorneyHearingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttorneyId" Type="Int32" Nullable="false" />
+          <Property Name="HearingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasAttorney" Relationship="JcasModel.fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id" FromRole="JcasAttorneyHearingType" ToRole="JcasAttorney" />
+          <NavigationProperty Name="JcasHearingType" Relationship="JcasModel.fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id" FromRole="JcasAttorneyHearingType" ToRole="JcasHearingType" />
+        </EntityType>
+        <EntityType Name="JcasCourtClosed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourtClosedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CourtClosedReason" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="JcasCourtroom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Courtroom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasSessions" Relationship="JcasModel.fk_JcasSession_CourtroomId_JcasCourtroom_Id" FromRole="JcasCourtroom" ToRole="JcasSession" />
+        </EntityType>
+        <EntityType Name="JcasDateType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaximumSequence" Type="Int32" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasRules" Relationship="JcasModel.fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id" FromRole="JcasDateType" ToRole="JcasRule" />
+          <NavigationProperty Name="JcasRules1" Relationship="JcasModel.fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id" FromRole="JcasDateType" ToRole="JcasRule" />
+          <NavigationProperty Name="JcasRules2" Relationship="JcasModel.fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id" FromRole="JcasDateType" ToRole="JcasRule" />
+          <NavigationProperty Name="JcasRules3" Relationship="JcasModel.fk_JcasRule_SessionToDateTypeId_JcasDateType_Id" FromRole="JcasDateType" ToRole="JcasRule" />
+        </EntityType>
+        <EntityType Name="JcasDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JcasHearingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HearingTypeCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="HearingTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasAttorneyHearingTypes" Relationship="JcasModel.fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id" FromRole="JcasHearingType" ToRole="JcasAttorneyHearingType" />
+          <NavigationProperty Name="JcasSessions" Relationship="JcasModel.fk_JcasSession_HearingTypeId_JcasHearingType_Id" FromRole="JcasHearingType" ToRole="JcasSession" />
+        </EntityType>
+        <EntityType Name="JcasHoliday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HolidayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HolidayStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="YearRepeat" Type="Int32" Nullable="false" />
+          <Property Name="HolidayMonth" Type="Int32" Nullable="false" />
+          <Property Name="SpecificDay" Type="Int32" />
+          <Property Name="SpecificWeekday" Type="Int32" />
+          <Property Name="SpecificWeekdaySequence" Type="Int32" />
+          <Property Name="SundayMove" Type="Int32" Nullable="false" />
+          <Property Name="SaturdayMove" Type="Int32" Nullable="false" />
+          <Property Name="HolidayDays" Type="Int32" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="JcasLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableId" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnId" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="RowId" Type="Int32" Nullable="false" />
+          <Property Name="NewValue" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="LogAction" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LogDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JcasMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageText" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayAsError" Type="Boolean" Nullable="false" />
+          <Property Name="ApplicationAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="JcasRule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RuleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RuleDescription" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SessionMonthSequence" Type="Int32" Nullable="false" />
+          <Property Name="SessionFromDateTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SessionFromSequence" Type="Int32" Nullable="false" />
+          <Property Name="SessionToDateTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SessionToSequence" Type="Int32" Nullable="false" />
+          <Property Name="HearingTypeCount" Type="Int32" Nullable="false" />
+          <Property Name="UserGroup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasSessionFromDateType" Relationship="JcasModel.fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id" FromRole="JcasRule" ToRole="JcasDateType" />
+          <NavigationProperty Name="JcasSessionToDateType" Relationship="JcasModel.fk_JcasRule_SessionToDateTypeId_JcasDateType_Id" FromRole="JcasRule" ToRole="JcasDateType" />
+          <Property Name="SubmitFromDateTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SubmitFromSequence" Type="Int32" Nullable="false" />
+          <Property Name="SubmitToDateTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SubmitToSequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JcasSubmitToDateType" Relationship="JcasModel.fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id" FromRole="JcasRule" ToRole="JcasDateType" />
+          <NavigationProperty Name="JcasSubmitFromDateType" Relationship="JcasModel.fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id" FromRole="JcasRule" ToRole="JcasDateType" />
+        </EntityType>
+        <EntityType Name="JcasSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AttorneyId" Type="Int32" />
+          <Property Name="HearingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CourtroomId" Type="Int32" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="JcasAttorney" Relationship="JcasModel.fk_JcasSession_AttorneyId_JcasAttorney_Id" FromRole="JcasSession" ToRole="JcasAttorney" />
+          <NavigationProperty Name="JcasCourtroom" Relationship="JcasModel.fk_JcasSession_CourtroomId_JcasCourtroom_Id" FromRole="JcasSession" ToRole="JcasCourtroom" />
+          <NavigationProperty Name="JcasHearingType" Relationship="JcasModel.fk_JcasSession_HearingTypeId_JcasHearingType_Id" FromRole="JcasSession" ToRole="JcasHearingType" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="JcasSessionRequests" Relationship="JcasModel.JcasSessionRequest_SessionId_JcasSession_Id_FK" FromRole="JcasSession" ToRole="JcasSessionRequest" />
+        </EntityType>
+        <EntityType Name="JcasSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SettingLabelText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingDataType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingMaxLength" Type="Int32" Nullable="false" />
+          <Property Name="SettingRequired" Type="Boolean" Nullable="false" />
+          <Property Name="SettingTooltip" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SettingOrder" Type="Int32" Nullable="false" />
+          <Property Name="SettingVisible" Type="Boolean" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="JcasUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLoginId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <Association Name="fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id">
+          <End Type="JcasModel.JcasAttorney" Role="JcasAttorney" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="JcasModel.JcasAttorneyHearingType" Role="JcasAttorneyHearingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasAttorney">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasAttorneyHearingType">
+              <PropertyRef Name="AttorneyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasSession_AttorneyId_JcasAttorney_Id">
+          <End Type="JcasModel.JcasAttorney" Role="JcasAttorney" Multiplicity="0..1" />
+          <End Type="JcasModel.JcasSession" Role="JcasSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasAttorney">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasSession">
+              <PropertyRef Name="AttorneyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id">
+          <End Type="JcasModel.JcasHearingType" Role="JcasHearingType" Multiplicity="1" />
+          <End Type="JcasModel.JcasAttorneyHearingType" Role="JcasAttorneyHearingType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasHearingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasAttorneyHearingType">
+              <PropertyRef Name="HearingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasSession_CourtroomId_JcasCourtroom_Id">
+          <End Type="JcasModel.JcasCourtroom" Role="JcasCourtroom" Multiplicity="0..1" />
+          <End Type="JcasModel.JcasSession" Role="JcasSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasCourtroom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasSession">
+              <PropertyRef Name="CourtroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id">
+          <End Type="JcasModel.JcasDateType" Role="JcasDateType" Multiplicity="1" />
+          <End Type="JcasModel.JcasRule" Role="JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SubmitFromDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id">
+          <End Type="JcasModel.JcasDateType" Role="JcasDateType" Multiplicity="1" />
+          <End Type="JcasModel.JcasRule" Role="JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SubmitToDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id">
+          <End Type="JcasModel.JcasDateType" Role="JcasDateType" Multiplicity="1" />
+          <End Type="JcasModel.JcasRule" Role="JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SessionFromDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasRule_SessionToDateTypeId_JcasDateType_Id">
+          <End Type="JcasModel.JcasDateType" Role="JcasDateType" Multiplicity="1" />
+          <End Type="JcasModel.JcasRule" Role="JcasRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasDateType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasRule">
+              <PropertyRef Name="SessionToDateTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_JcasSession_HearingTypeId_JcasHearingType_Id">
+          <End Type="JcasModel.JcasHearingType" Role="JcasHearingType" Multiplicity="1" />
+          <End Type="JcasModel.JcasSession" Role="JcasSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasHearingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasSession">
+              <PropertyRef Name="HearingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JcasReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ReportDescription" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ReportParameter" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserGroup" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <ComplexType Name="pJcasSessionGetCalendar_Result">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekday" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="String" Name="HearingType" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="SessionId" Nullable="true" />
+          <Property Type="Int32" Name="AttorneyId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="pJcasSessionGetCalendar_Result1">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="String" Name="HearingType" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="SessionId" Nullable="true" />
+          <Property Type="Int32" Name="AttorneyId" Nullable="true" />
+          <Property Type="String" Name="AttorneyName" Nullable="false" MaxLength="52" />
+          <Property Type="String" Name="Courtroom" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="pJcasSessionGetCalendar_Result2">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="HearingType" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="SessionId" Nullable="true" />
+          <Property Type="Int32" Name="AttorneyId" Nullable="true" />
+          <Property Type="String" Name="AttorneyName" Nullable="false" MaxLength="52" />
+          <Property Type="String" Name="Courtroom" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="pJcasSessionGetCalendar_Result3">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CourtClosed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HearingType" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="SessionId" Nullable="true" />
+          <Property Type="Int32" Name="AttorneyId" Nullable="true" />
+          <Property Type="String" Name="AttorneyName" Nullable="false" MaxLength="52" />
+          <Property Type="String" Name="Courtroom" Nullable="false" MaxLength="23" />
+        </ComplexType>
+        <ComplexType Name="pJcasSessionGetCalendar_Result4">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CourtClosed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HearingType" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="SessionId" Nullable="true" />
+          <Property Type="Int32" Name="AttorneyId" Nullable="true" />
+          <Property Type="String" Name="AttorneyName" Nullable="false" MaxLength="52" />
+          <Property Type="String" Name="Courtroom" Nullable="false" MaxLength="23" />
+        </ComplexType>
+        <ComplexType Name="rAttorneyCalendar_Result">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="String" Name="CalendarMonthName" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+          <Property Type="String" Name="SessionInfo" Nullable="false" MaxLength="73" />
+        </ComplexType>
+        <ComplexType Name="rAttorneySchedule_Result">
+          <Property Type="String" Name="AttorneyName" Nullable="false" MaxLength="152" />
+          <Property Type="String" Name="SessionName" Nullable="true" MaxLength="62" />
+          <Property Type="String" Name="HearingType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Courtroom" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="rCourtCalendar_Result">
+          <Property Type="DateTime" Name="CalendarDate" Nullable="true" />
+          <Property Type="Int32" Name="CalendarWeek" Nullable="true" />
+          <Property Type="String" Name="CalendarMonthName" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="CalendarWeekday" Nullable="true" />
+          <Property Type="String" Name="CalendarWeekdayName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+          <Property Type="String" Name="SessionInfo" Nullable="true" MaxLength="300" />
+        </ComplexType>
+        <EntityType Name="JcasCourtDateNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="JcasSessionRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="AttorneyId" Type="Int32" Nullable="false" />
+          <Property Name="CourtroomId" Type="Int32" Nullable="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserLoginIdUpdate" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RowVersionId" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="JcasSession" Relationship="JcasModel.JcasSessionRequest_SessionId_JcasSession_Id_FK" FromRole="JcasSessionRequest" ToRole="JcasSession" />
+        </EntityType>
+        <Association Name="JcasSessionRequest_SessionId_JcasSession_Id_FK">
+          <End Type="JcasModel.JcasSession" Role="JcasSession" Multiplicity="1" />
+          <End Type="JcasModel.JcasSessionRequest" Role="JcasSessionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JcasSession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JcasSessionRequest">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JcasModelStoreContainer" CdmEntityContainer="JcasEntities">
+          <EntitySetMapping Name="JcasAttorneys">
+            <EntityTypeMapping TypeName="JcasModel.JcasAttorney">
+              <MappingFragment StoreEntitySet="JcasAttorney">
+                <ScalarProperty Name="LawFirmName" ColumnName="LawFirmName" />
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="EmailConfirmationExpires" ColumnName="EmailConfirmationExpires" />
+                <ScalarProperty Name="EmailConfirmationCode" ColumnName="EmailConfirmationCode" />
+                <ScalarProperty Name="EmailIsConfirmed" ColumnName="EmailIsConfirmed" />
+                <ScalarProperty Name="LastPasswordChange" ColumnName="LastPasswordChange" />
+                <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
+                <ScalarProperty Name="PasswordExpires" ColumnName="PasswordExpires" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="BarNumber" ColumnName="BarNumber" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasAttorneyHearingTypes">
+            <EntityTypeMapping TypeName="JcasModel.JcasAttorneyHearingType">
+              <MappingFragment StoreEntitySet="JcasAttorneyHearingType">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="HearingTypeId" ColumnName="HearingTypeId" />
+                <ScalarProperty Name="AttorneyId" ColumnName="AttorneyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasCourtCloseds">
+            <EntityTypeMapping TypeName="JcasModel.JcasCourtClosed">
+              <MappingFragment StoreEntitySet="JcasCourtClosed">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="CourtClosedReason" ColumnName="CourtClosedReason" />
+                <ScalarProperty Name="CourtClosedDate" ColumnName="CourtClosedDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasCourtrooms">
+            <EntityTypeMapping TypeName="JcasModel.JcasCourtroom">
+              <MappingFragment StoreEntitySet="JcasCourtroom">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="Courtroom" ColumnName="Courtroom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasDateTypes">
+            <EntityTypeMapping TypeName="JcasModel.JcasDateType">
+              <MappingFragment StoreEntitySet="JcasDateType">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="MaximumSequence" ColumnName="MaximumSequence" />
+                <ScalarProperty Name="DateTypeName" ColumnName="DateTypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasDescriptions">
+            <EntityTypeMapping TypeName="JcasModel.JcasDescription">
+              <MappingFragment StoreEntitySet="JcasDescription">
+                <ScalarProperty Name="DescriptionText" ColumnName="DescriptionText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasHearingTypes">
+            <EntityTypeMapping TypeName="JcasModel.JcasHearingType">
+              <MappingFragment StoreEntitySet="JcasHearingType">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="HearingTypeName" ColumnName="HearingTypeName" />
+                <ScalarProperty Name="HearingTypeCode" ColumnName="HearingTypeCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasHolidays">
+            <EntityTypeMapping TypeName="JcasModel.JcasHoliday">
+              <MappingFragment StoreEntitySet="JcasHoliday">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="HolidayDays" ColumnName="HolidayDays" />
+                <ScalarProperty Name="SaturdayMove" ColumnName="SaturdayMove" />
+                <ScalarProperty Name="SundayMove" ColumnName="SundayMove" />
+                <ScalarProperty Name="SpecificWeekdaySequence" ColumnName="SpecificWeekdaySequence" />
+                <ScalarProperty Name="SpecificWeekday" ColumnName="SpecificWeekday" />
+                <ScalarProperty Name="SpecificDay" ColumnName="SpecificDay" />
+                <ScalarProperty Name="HolidayMonth" ColumnName="HolidayMonth" />
+                <ScalarProperty Name="YearRepeat" ColumnName="YearRepeat" />
+                <ScalarProperty Name="HolidayStart" ColumnName="HolidayStart" />
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasLogs">
+            <EntityTypeMapping TypeName="JcasModel.JcasLog">
+              <MappingFragment StoreEntitySet="JcasLog">
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+                <ScalarProperty Name="LogAction" ColumnName="LogAction" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+                <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasMessages">
+            <EntityTypeMapping TypeName="JcasModel.JcasMessage">
+              <MappingFragment StoreEntitySet="JcasMessage">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="ApplicationAvailable" ColumnName="ApplicationAvailable" />
+                <ScalarProperty Name="DisplayAsError" ColumnName="DisplayAsError" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasRules">
+            <EntityTypeMapping TypeName="JcasModel.JcasRule">
+              <MappingFragment StoreEntitySet="JcasRule">
+                <ScalarProperty Name="SubmitToSequence" ColumnName="SubmitToSequence" />
+                <ScalarProperty Name="SubmitToDateTypeId" ColumnName="SubmitToDateTypeId" />
+                <ScalarProperty Name="SubmitFromSequence" ColumnName="SubmitFromSequence" />
+                <ScalarProperty Name="SubmitFromDateTypeId" ColumnName="SubmitFromDateTypeId" />
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="UserGroup" ColumnName="UserGroup" />
+                <ScalarProperty Name="HearingTypeCount" ColumnName="HearingTypeCount" />
+                <ScalarProperty Name="SessionToSequence" ColumnName="SessionToSequence" />
+                <ScalarProperty Name="SessionToDateTypeId" ColumnName="SessionToDateTypeId" />
+                <ScalarProperty Name="SessionFromSequence" ColumnName="SessionFromSequence" />
+                <ScalarProperty Name="SessionFromDateTypeId" ColumnName="SessionFromDateTypeId" />
+                <ScalarProperty Name="SessionMonthSequence" ColumnName="SessionMonthSequence" />
+                <ScalarProperty Name="RuleDescription" ColumnName="RuleDescription" />
+                <ScalarProperty Name="RuleName" ColumnName="RuleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasSessions">
+            <EntityTypeMapping TypeName="JcasModel.JcasSession">
+              <MappingFragment StoreEntitySet="JcasSession">
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="CourtroomId" ColumnName="CourtroomId" />
+                <ScalarProperty Name="HearingTypeId" ColumnName="HearingTypeId" />
+                <ScalarProperty Name="AttorneyId" ColumnName="AttorneyId" />
+                <ScalarProperty Name="SessionDate" ColumnName="SessionDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasSettings">
+            <EntityTypeMapping TypeName="JcasModel.JcasSetting">
+              <MappingFragment StoreEntitySet="JcasSetting">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="SettingVisible" ColumnName="SettingVisible" />
+                <ScalarProperty Name="SettingOrder" ColumnName="SettingOrder" />
+                <ScalarProperty Name="SettingTooltip" ColumnName="SettingTooltip" />
+                <ScalarProperty Name="SettingRequired" ColumnName="SettingRequired" />
+                <ScalarProperty Name="SettingMaxLength" ColumnName="SettingMaxLength" />
+                <ScalarProperty Name="SettingDataType" ColumnName="SettingDataType" />
+                <ScalarProperty Name="SettingLabelText" ColumnName="SettingLabelText" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasUsers">
+            <EntityTypeMapping TypeName="JcasModel.JcasUser">
+              <MappingFragment StoreEntitySet="JcasUser">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pJcasHolidayInsertNextYear" FunctionName="JcasModel.Store.pJcasHolidayInsertNextYear" />
+          <EntitySetMapping Name="JcasReports">
+            <EntityTypeMapping TypeName="JcasModel.JcasReport">
+              <MappingFragment StoreEntitySet="JcasReport">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="UserGroup" ColumnName="UserGroup" />
+                <ScalarProperty Name="ReportParameter" ColumnName="ReportParameter" />
+                <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pJcasSessionInsertNextYear" FunctionName="JcasModel.Store.pJcasSessionInsertNextYear" />
+          <FunctionImportMapping FunctionImportName="pJcasSessionGetCalendar" FunctionName="JcasModel.Store.pJcasSessionGetCalendar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JcasModel.pJcasSessionGetCalendar_Result4">
+                <ScalarProperty Name="CalendarDate" ColumnName="CalendarDate" />
+                <ScalarProperty Name="CalendarWeek" ColumnName="CalendarWeek" />
+                <ScalarProperty Name="CalendarDay" ColumnName="CalendarDay" />
+                <ScalarProperty Name="CalendarWeekday" ColumnName="CalendarWeekday" />
+                <ScalarProperty Name="CalendarWeekdayName" ColumnName="CalendarWeekdayName" />
+                <ScalarProperty Name="CourtClosed" ColumnName="CourtClosed" />
+                <ScalarProperty Name="HearingType" ColumnName="HearingType" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="AttorneyId" ColumnName="AttorneyId" />
+                <ScalarProperty Name="AttorneyName" ColumnName="AttorneyName" />
+                <ScalarProperty Name="Courtroom" ColumnName="Courtroom" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rAttorneyCalendar" FunctionName="JcasModel.Store.rAttorneyCalendar">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rAttorneySchedule" FunctionName="JcasModel.Store.rAttorneySchedule">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rCourtCalendar" FunctionName="JcasModel.Store.rCourtCalendar">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="JcasCourtDateNotes">
+            <EntityTypeMapping TypeName="JcasModel.JcasCourtDateNote">
+              <MappingFragment StoreEntitySet="JcasCourtDateNote">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JcasSessionRequests">
+            <EntityTypeMapping TypeName="JcasModel.JcasSessionRequest">
+              <MappingFragment StoreEntitySet="JcasSessionRequest">
+                <ScalarProperty Name="RowVersionId" ColumnName="RowVersionId" />
+                <ScalarProperty Name="UserLoginIdUpdate" ColumnName="UserLoginIdUpdate" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="CourtroomId" ColumnName="CourtroomId" />
+                <ScalarProperty Name="AttorneyId" ColumnName="AttorneyId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

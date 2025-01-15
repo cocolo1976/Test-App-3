@@ -1,0 +1,114 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasAttorney>
+@using FairfaxCounty.JCAS_Public_MVC.Helpers
+@{
+    ViewBag.Title = "Attorneys";
+    string filter = HttpContext.Current.Server.HtmlEncode(Convert.ToString(Request.QueryString["filter"]));
+    int totalPages = Convert.ToInt32(ViewBag.TotalPages);
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Index", "JcasAttorneys", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="filter">Search for:</label>
+            <div class="col-md-3">
+                @Html.TextBox("filter", "", new { @class = "form-control" })
+            </div>
+            <div class="col-md-7">
+                <input type="submit" value="Search" class="btn btn-default" />
+                @Html.ActionLink("Clear", "Index")
+            </div>
+        </div>
+    </div>
+}
+@Html.PagingLinks("Index", "JcasAttorneys", totalPages)
+<table class="table hidden-xs">
+    <tr>
+        <th></th>
+        <th>
+            @Html.ActionLink("Attorney Name", "Index", "JcasAttorneys", new { orderBy = ViewBag.FullNameSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("Bar Number", "Index", "JcasAttorneys", new { orderBy = ViewBag.BarNumberSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("Email Address", "Index", "JcasAttorneys", new { orderBy = ViewBag.EmailAddressSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("Phone Number", "Index", "JcasAttorneys", new { orderBy = ViewBag.PhoneNumberSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("Law Firm Name", "Index", "JcasAttorneys", new { orderBy = ViewBag.LawFirmNameSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("IsActive", "Index", "JcasAttorneys", new { orderBy = ViewBag.IsActiveSortParm, filter = filter }, null)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        @if (User.IsInRole(Constants.InternalRoleReadOnly))
+        {
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @if (User.IsInRole(Constants.InternalRoleDataEntry))
+                {
+                    @Html.ActionLink(" | Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink(" | Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BarNumber)
+        </td>
+        <td>
+            @Html.Raw(item.EmailAddress)
+        </td>
+        <td>
+            @Html.Raw(item.PhoneNumber.ToString())
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LawFirmName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+    </tr>
+    }
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @if (User.IsInRole(Constants.InternalRoleDataEntry))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                @Html.DisplayFor(modelItem => item.FullName)
+            </div>
+            @if (User.IsInRole(Constants.InternalRoleReadOnly))
+            {
+                <div class="panel-footer">
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+                    @if (User.IsInRole(Constants.InternalRoleDataEntry))
+                    {
+                        @Html.ActionLink(" | Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink(" | Delete", "Delete", new { id = item.Id })
+                    }
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(modelItem => item.BarNumber) <br />
+                    @Html.Raw(item.EmailAddress) <br />
+                    @Html.Raw(item.PhoneNumber) <br />
+                    @Html.DisplayFor(modelItem => item.LawFirmName)<br />
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </div>
+            }
+        </div>
+    }
+</div>

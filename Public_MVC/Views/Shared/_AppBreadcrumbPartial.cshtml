@@ -1,0 +1,25 @@
+﻿<div class="fairfax-breadcrumb">
+    <div class="row">
+        <div class="col-md-9 col-sm-9 col-xs-9"><p>@Constants.AppName.ToString()</p></div>
+        @* NuGet: MvcSiteMapProvider.MVC5 *@
+        @* <div class="col-md-9 col-sm-9 col-xs-9">@Html.MvcSiteMap().SiteMapPath()</div> *@
+        @*@if (Request.IsAuthenticated)
+        {
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            @{
+                //for attorney users, point to the help document for attorneys
+                if (User.IsInRole(Constants.ExternalRoleAttorney))
+                {
+                    <p class="pull-right"><a href="~/Account/Logout">Log out</a>&nbsp;&nbsp;<a href="~/JCAS_AttorneyHelp.pdf" target="_blank">Help</a></p>
+                }
+                //for internal users, point to the help document for internal users
+                else
+                {
+                    <p class="pull-right"><a href="~/Account/Logout">Log out</a>&nbsp;&nbsp;<a href="~/JCAS_Help.pdf" target="_blank">Help</a></p>
+                }
+            }
+        </div>
+        }*@
+    </div>
+</div>
+

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/" title="" >
+    <siteMapNode url="~/JcasAttorneys/Edit" title="Edit Profile" roles="Attorney" />
+    <siteMapNode url="~/Account/ChangePassword" title="Change Password" roles="Attorney" />
+    <siteMapNode url="~/JcasSessions/Calendar?view=Schedule" title="Sessions" roles="ReadOnly,Attorney" />
+    <siteMapNode url="~/Home?Menu=Reports" title="Reports" roles="ReadOnly,Attorney" >
+      <siteMapNode url="~/JcasReports/Run/1?UserGroup=Internal" title="Court Calendar" roles="ReadOnly" />
+      <siteMapNode url="~/JcasReports/Run/2?UserGroup=Attorney" title="Attorney Calendar" roles="ReadOnly,Attorney" />
+      <siteMapNode url="~/JcasReports/Run/3?UserGroup=Attorney" title="Attorney Schedule" roles="ReadOnly,Attorney" />
+    </siteMapNode>
+    <siteMapNode url="~/JcasAttorneys/Index" title="Attorneys" roles="ReadOnly" />
+    <siteMapNode url="~/Home?Menu=DataEntry" title="DataEntry" roles="DataEntry" >
+      <siteMapNode url="~/JcasCourtCloseds/Index" title="Court Closed" />
+      <siteMapNode url="~/JcasCourtDateNotes/Index" title="Court Date Notes" />
+      <siteMapNode url="~/JcasSessions/Calendar?view=Delete" title="Delete Sessions" />
+    </siteMapNode>
+    <siteMapNode url="~/Home?Menu=SysAdmin" title="SysAdmin" roles="SysAdmin" >
+      <siteMapNode url="~/JcasCourtrooms/Index" title="Courtrooms" />
+      <siteMapNode url="~/JcasHearingTypes/Index" title="Hearing Types" />
+      <siteMapNode url="~/JcasMessages/Index" title="Messages" />
+      <siteMapNode url="~/JcasSettings/Index" title="Settings" />
+      <siteMapNode url="~/JcasUsers/Index" title="Users" />
+    </siteMapNode>
+    <siteMapNode url="~/Account/Logout" title="Log out" roles="ReadOnly,Attorney" />
+    <siteMapNode url="~/JCAS_Help.pdf" title="Help" roles="ReadOnly" />
+    <siteMapNode url="~/JCAS_AttorneyHelp.pdf" title="Help" roles="Attorney" />
+  </siteMapNode>
+</siteMap>

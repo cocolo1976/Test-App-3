@@ -1,0 +1,72 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasAttorney
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Attorney Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            Bar Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarNumber)
+        </dd>
+
+        <dt>
+            Email Address
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            Law Firm Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LawFirmName)
+        </dd>
+
+        <dt>
+            Phone Number
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(model => model.PhoneNumber)
+        </dd>
+
+        @if (User.IsInRole(Constants.InternalRoleReadOnly))
+        {
+            <dt>
+                Is Active
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+        }
+
+        <dt>
+            Hearing Type
+        </dt>
+
+        <dd>
+            <div>
+                @{
+                    foreach (var hearingType in (Model.JcasAttorneyHearingTypes))
+                    {
+                        @Html.Raw(hearingType.JcasHearingType.HearingTypeName.ToString());
+                        <br />
+                    }
+                }
+            </div>
+        </dd>
+    </dl>
+</div>

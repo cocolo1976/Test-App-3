@@ -1,0 +1,142 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasSession
+@{
+    ViewBag.Title = "Create Session";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@{
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+        @Html.Partial("_SessionDetails", Model)
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <hr />
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SessionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.SessionDate, new { htmlAttributes = new { @class = "form-control datepicker", @id = "SessionDate" } })
+                        @Html.ValidationMessageFor(model => model.SessionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HearingTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.HearingTypeId, new SelectList(Enumerable.Empty<SelectListItem>()), Constants.SelectOne, htmlAttributes: new { @class = "form-control", @id = "HearingTypeId" })
+                        @Html.ValidationMessageFor(model => model.HearingTypeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AttorneyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.AttorneyId, new SelectList(Enumerable.Empty<SelectListItem>()), Constants.SelectOne, htmlAttributes: new { @class = "form-control", @id = "AttorneyId" })
+                        @Html.ValidationMessageFor(model => model.AttorneyId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourtroomId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.CourtroomId, new List<SelectListItem>(ViewBag.CourtroomList), Constants.SelectOne, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CourtroomId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    @Html.ActionLink("Back to Calendar", "Calendar", new { selectedMonth = ViewBag.SelectedMonth })
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //restrict the calendar to start from current date
+            var startDate = new Date();
+            startDate.getDate;
+            //restrict the calendar to end one year after current date
+            var endDate = "@ViewBag.EndDate";
+            //disable the court closed dates
+            var disabledDates = "@ViewBag.DisabledDates";
+
+            $('.datepicker').datepicker({
+                maxViewMode: "days",
+                updateViewDate: false,
+                daysOfWeekDisabled: '0,6',
+                todayHighlight: true,
+                autoclose: true,
+                orientation: "bottom auto",
+                datesDisabled: disabledDates,
+                startDate: startDate,
+                endDate: endDate
+            });
+
+            $("#SessionDate").change(function () {
+                var sessionDate = $("#SessionDate").val();
+                // if a session date is selected
+                if (sessionDate != null && sessionDate != "") {
+                    //clear the hearing type lookup
+                    var hearingTypeList = $("#HearingTypeId");
+                    hearingTypeList.empty();
+                    //clear the attorney lookup
+                    var attorneyList = $("#AttorneyId")
+                    attorneyList.empty();
+                    //populate the hearing type list
+                    $.getJSON('@Url.Action("GetHearingTypes")', { sessionDate: sessionDate }, function (hearingTypesReturned) {
+
+                        if (hearingTypesReturned != null && !jQuery.isEmptyObject(hearingTypesReturned)) {
+                            hearingTypeList.append($("<option/>", {
+                                value: "@string.Empty",
+                                text: "@Constants.SelectOne"}));
+
+                            $.each(hearingTypesReturned, function (index, item) {
+                                hearingTypeList.append($("<option/>", {
+                                    value: item.Value,
+                                    text: item.Text
+                                }));
+                            });
+                        };
+                    })
+                 };
+            });
+            $("#HearingTypeId").change(function () {
+                var sessionDate = $("#SessionDate").val();
+                var hearingTypeId = $("#HearingTypeId").val();
+                // if a session date and a hearing type is selected
+                if (hearingTypeId != null && hearingTypeId != "" && sessionDate != null && sessionDate != "") {
+                    //clear the attorney lookup
+                    var attorneyList = $("#AttorneyId")
+                    attorneyList.empty();
+                    //populate the attorney list
+                    $.getJSON('@Url.Action("GetAttorneys")', { sessionDate: sessionDate, hearingTypeId: hearingTypeId }, function (attorneysReturned) {
+
+                        if (attorneysReturned != null && !jQuery.isEmptyObject(attorneysReturned)) {
+                            attorneyList.append($("<option/>", {
+                                value: "@string.Empty",
+                                text: "@Constants.SelectOne"}));
+
+                            $.each(attorneysReturned, function (index, item) {
+                                attorneyList.append($("<option/>", {
+                                    value: item.Value,
+                                    text: item.Text
+                                }));
+                            });
+                        };
+                    })
+                 };
+            });
+        });
+    </script>
+}

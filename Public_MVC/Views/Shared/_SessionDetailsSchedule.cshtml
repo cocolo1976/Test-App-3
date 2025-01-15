@@ -1,0 +1,42 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasSession
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.SessionDate)
+@Html.HiddenFor(model => model.CourtroomId)
+@Html.HiddenFor(model => model.HearingTypeId)
+@Html.HiddenFor(model => model.AttorneyId)
+@Html.HiddenFor(model => model.RowVersionId)
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Session Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SessionDate)
+        </dd>
+
+        <dt>
+            Attorney Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JcasAttorney.FullName)
+        </dd>
+
+        <dt>
+            Hearing Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JcasHearingType.HearingTypeName)
+        </dd>
+        <dt>
+            Courtroom
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JcasCourtroom.Courtroom)
+        </dd>
+    </dl>
+</div>

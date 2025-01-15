@@ -1,0 +1,65 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasMessage
+
+@{
+    ViewBag.Title = "Delete Application Message";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <hr />
+            <dl>
+                <dt class="col-md-2">
+                    Message Text
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MessageText)
+                </dd>
+
+                <dt class="col-md-2">
+                    Display As Error
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DisplayAsError)
+                </dd>
+
+                <dt class="col-md-2">
+                    Application Available
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicationAvailable)
+                </dd>
+
+                <dt class="col-md-2">
+                    Start DateTime
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDateTime)
+                </dd>
+
+                <dt class="col-md-2">
+                    End DateTime
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndDateTime)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

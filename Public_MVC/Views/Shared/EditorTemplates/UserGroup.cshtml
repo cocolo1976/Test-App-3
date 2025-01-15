@@ -1,0 +1,12 @@
+﻿@model string
+@{
+    var groups = new List<SelectListItem>();
+    groups.Add(new SelectListItem { Text = "Internal", Value = "Internal" });
+    groups.Add(new SelectListItem { Text = "Attorney", Value = "Attorney" });
+    groups.Add(new SelectListItem { Text = "Internal,Attorney", Value = "Internal,Attorney" });
+}
+@Html.DropDownListFor(g => g, groups, htmlAttributes: new { @class = "form-control" })
+
+
+
+

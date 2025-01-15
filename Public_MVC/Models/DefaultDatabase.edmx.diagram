@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="53b04b3f87fc465783a3f42a6e34985e" Name="Diagram1">
+        <EntityTypeShape EntityType="JcasModel.JcasAttorney" Width="1.5" PointX="9.875" PointY="3.625" />
+        <EntityTypeShape EntityType="JcasModel.JcasAttorneyHearingType" Width="1.5" PointX="5.875" PointY="4.125" />
+        <EntityTypeShape EntityType="JcasModel.JcasCourtClosed" Width="1.5" PointX="0.625" PointY="8.625" />
+        <EntityTypeShape EntityType="JcasModel.JcasCourtroom" Width="1.5" PointX="9.875" PointY="1.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasDescription" Width="1.5" PointX="0.625" PointY="4.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasDateType" Width="1.5" PointX="0.625" PointY="4.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasHearingType" Width="1.5" PointX="5.875" PointY="1.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasHoliday" Width="1.5" PointX="2.875" PointY="7.625" />
+        <EntityTypeShape EntityType="JcasModel.JcasLog" Width="1.5" PointX="8" PointY="5.5" />
+        <EntityTypeShape EntityType="JcasModel.JcasMessage" Width="1.5" PointX="6.875" PointY="8.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasSession" Width="1.5" PointX="7.875" PointY="1.375" />
+        <EntityTypeShape EntityType="JcasModel.JcasSetting" Width="1.5" PointX="4.875" PointY="7.875" />
+        <EntityTypeShape EntityType="JcasModel.JcasUser" Width="1.5" PointX="0.625" PointY="6" />
+        <AssociationConnector Association="JcasModel.fk_JcasAttorneyHearingType_AttorneyId_JcasAttorney_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasSession_AttorneyId_JcasAttorney_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasAttorneyHearingType_HearingTypeId_JcasHearingType_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasSession_CourtroomId_JcasCourtroom_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasSession_HearingTypeId_JcasHearingType_Id" />
+        <EntityTypeShape EntityType="JcasModel.JcasReport" Width="1.5" PointX="9.125" PointY="9.25" />
+        <EntityTypeShape EntityType="JcasModel.JcasRule" Width="2" PointX="3.5" PointY="1.375" />
+        <AssociationConnector Association="JcasModel.fk_JcasRule_SubmitFromDateTypeId_JcasDateType_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasRule_SubmitToDateTypeId_JcasDateType_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasRule_SessionFromDateTypeId_JcasDateType_Id" />
+        <AssociationConnector Association="JcasModel.fk_JcasRule_SessionToDateTypeId_JcasDateType_Id" />
+        <EntityTypeShape EntityType="JcasModel.JcasCourtDateNote" Width="1.875" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JcasModel.JcasSessionRequest" Width="1.5" PointX="10.125" PointY="12.75" />
+        <AssociationConnector Association="JcasModel.JcasSessionRequest_SessionId_JcasSession_Id_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

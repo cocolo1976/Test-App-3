@@ -1,0 +1,78 @@
+﻿@model List<FairfaxCounty.JCAS_Public_MVC.Models.JcasSession>
+@{
+    ViewBag.Title = "Edit Courtrooms";
+}
+<h2>@ViewBag.Title</h2>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+    }
+}
+<div class="form-horizontal">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("Courtrooms", "JcasSessions", FormMethod.Get))
+    {
+        <div class="form-group">
+            <div class="col-md-2 text-right">
+                @Html.Label("Session Date", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="selectedDate" id="selectedDate" class="form-control datepicker" value="@ViewBag.SelectedDate"
+                       title="Select date to display court sessions." onchange="this.form.submit()" />
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("Courtrooms", "JcasSessions", FormMethod.Post))
+    {
+        if (Model != null && Model.Count() > 0)
+        {
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                <div class="form-group">
+                    @Html.HiddenFor(m => Model[i].Id)
+                    @Html.HiddenFor(item => Model[i].RowVersionId)
+                    <div class="col-md-2 text-right">
+                        @Html.DisplayFor(item => Model[i].JcasHearingType.HearingTypeCode)
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(item => Model[i].CourtroomId,
+                                new SelectList(ViewBag.CourtroomList, "Value", "Text", Model[i].CourtroomId), Constants.SelectOne, null)
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="submit" value="Save" name="btnSubmit" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    }
+    @Html.ActionLink("Back to Calendar", "Calendar", new { selectedMonth = ViewBag.SelectedMonth })
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //restrict the calendar to start from current date
+            var startDate = new Date();
+            startDate.getDate;
+            //restrict the calendar to end one year after current date
+            var endDate = "@ViewBag.EndDate";
+            //disable the court closed dates
+            var disabledDates = "@ViewBag.DisabledDates";
+            $('.datepicker').datepicker({
+                maxViewMode: "days",
+                updateViewDate: false,
+                daysOfWeekDisabled: '0,6',
+                todayHighlight: true,
+                autoclose: true,
+                orientation: "bottom auto",
+                datesDisabled: disabledDates,
+                startDate: startDate,
+                endDate: endDate
+            });
+        })
+    </script>
+}

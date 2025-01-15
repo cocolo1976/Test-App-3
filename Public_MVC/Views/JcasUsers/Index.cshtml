@@ -1,0 +1,78 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasUser>
+
+@{
+    ViewBag.Title = "Internal Users";
+    string filter = HttpContext.Current.Server.HtmlEncode(Convert.ToString(Request.QueryString["filter"]));
+    int totalPages = Convert.ToInt32(ViewBag.TotalPages);
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Index", "JcasUsers", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="filter">Search for:</label>
+            <div class="col-md-3">
+                @Html.TextBox("filter", "", new { @class = "form-control" })
+            </div>
+            <div class="col-md-7">
+                <input type="submit" value="Search" class="btn btn-default" />
+                @Html.ActionLink("Clear", "Index")
+            </div>
+        </div>
+    </div>
+}
+@Html.PagingLinks("Index", "JcasUsers", totalPages)
+<table class="table hidden-sx">
+    <tr>
+        <th>@Html.ActionLink("Create New", "Create")</th>
+        <th>
+            @Html.ActionLink("User Login Id", "Index", "JcasUsers", new { orderBy = ViewBag.UserLoginIdSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("User Name", "Index", "JcasUsers", new { orderBy = ViewBag.UserNameSortParm, filter = filter }, null)
+        </th>
+        <th>
+            @Html.ActionLink("User Role", "Index", "JcasUsers", new { orderBy = ViewBag.UserRoleSortParm, filter = filter }, null)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserLoginId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRole)
+            </td>
+        </tr>
+    }
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @Html.ActionLink("Create New", "Create")
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                @Html.DisplayFor(modelItem => item.UserLoginId)
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.UserName) <br />
+                @Html.DisplayFor(modelItem => item.UserRole)
+            </div>
+        </div>
+    }
+</div>

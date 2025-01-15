@@ -1,0 +1,67 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasCourtClosed>
+
+@{
+    ViewBag.Title = "Court Closed Dates";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Index", "JcasCourtCloseds", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+        <br />
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("selectedYear", new List<SelectListItem> (ViewBag.Years), htmlAttributes: new { @class = "form-control",
+               @title = "Select a year to display court closed dates.", @onchange = "submit()" })
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table hidden-xs">
+    <tr>
+        <th>@Html.ActionLink("Create New", "Create")</th>
+        <th>
+            Court Closed Date
+        </th>
+        <th>
+            Court Closed Reason
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourtClosedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourtClosedReason)
+            </td>
+        </tr>
+    }
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @Html.ActionLink("Create New", "Create")
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.CourtClosedDate) <br />
+                @Html.DisplayFor(modelItem => item.CourtClosedReason)
+            </div>
+        </div>
+    }
+</div>

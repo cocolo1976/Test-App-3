@@ -1,0 +1,131 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasRule
+
+@{
+    ViewBag.Title = "Delete Rule";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this Rule?</h3>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <hr />
+            <dl>
+                <dt class="col-md-2">
+                    Rule Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RuleName)
+                </dd>
+
+                <dt class="col-md-2">
+                    Rule Description
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RuleDescription)
+                </dd>
+
+                <dt class="col-md-2">
+                    Submit From
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JcasSubmitFromDateType.DateTypeName)
+                </dd>
+
+                <dt class="col-md-2">
+                    Submit From Sequence
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubmitFromSequence)
+                </dd>
+
+                <dt class="col-md-2">
+                    Submit To
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JcasSubmitToDateType.DateTypeName)
+                </dd>
+
+                <dt class="col-md-2">
+                    Submit To Sequence
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubmitToSequence)
+                </dd>
+
+                <dt class="col-md-2">
+                    Session Month Sequence
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SessionMonthSequence)
+                </dd>
+
+                <dt class="col-md-2">
+                    Session From
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JcasSessionFromDateType.DateTypeName)
+                </dd>
+
+                <dt class="col-md-2">
+                    Session From Sequence
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SessionFromSequence)
+                </dd>
+
+                <dt class="col-md-2">
+                    Session To
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JcasSessionToDateType.DateTypeName)
+                </dd>
+
+                <dt class="col-md-2">
+                    Session To Sequence
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SessionToSequence)
+                </dd>
+
+                <dt class="col-md-2">
+                    Hearing Type Count
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HearingTypeCount)
+                </dd>
+
+                <dt class="col-md-2">
+                    User Group
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserGroup)
+                </dd>
+
+            </dl>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

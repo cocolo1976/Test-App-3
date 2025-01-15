@@ -1,0 +1,40 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.Models.JcasCourtClosed
+
+@{
+    ViewBag.Title = "Delete Court Closed Date";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this Court Closed Date?</h3>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <hr />
+            <dl>
+                <dt class="col-md-2">
+                    Court Closed Date
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CourtClosedDate)
+                </dd>
+
+                <dt class="col-md-2">
+                    Court Closed Reason
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CourtClosedReason)
+                </dd>
+            </dl>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

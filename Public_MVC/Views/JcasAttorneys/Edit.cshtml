@@ -1,0 +1,137 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.ViewModels.AttorneyHearingTypeViewModel
+@using FairfaxCounty.JCAS_Public_MVC.ViewModels
+@{
+    ViewBag.Title = "Edit Attorney User";
+}
+<h2>@ViewBag.Title</h2>
+@if (!string.IsNullOrEmpty(ViewBag.MessageText))
+{
+    <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+    @Html.Partial("_AttorneyDetails", Model.Attorney)
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Attorney.Id)
+        @Html.HiddenFor(model => model.Attorney.RowVersionId)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Attorney.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Attorney.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.MiddleName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Attorney.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.BarNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Attorney.BarNumber, new { htmlAttributes = new { @class = "form-control numeric-only" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.BarNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                    @Html.LabelFor(model => model.Attorney.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })                    
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Attorney.PhoneNumber, new { htmlAttributes = new { @class = "form-control phoneNumber" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-2">
+                    @Html.Label("(enter numbers only)", htmlAttributes: new { @class = "small" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Attorney.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.EmailAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attorney.LawFirmName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Attorney.LawFirmName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attorney.LawFirmName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @{
+                if (User.IsInRole(Constants.InternalRoleDataEntry))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Attorney.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.Attorney.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Attorney.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(model => model.Attorney.IsActive)
+                }
+            }
+
+            <div class="form-group">
+                <span>
+                    @Html.Label("Hearing Types *", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.Label("(select at least one)", htmlAttributes: new { @class = "control-label col-md-pull-2" })
+                </span>
+            </div>
+            <div class="form-group">
+                @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Partial("_CommaDelimitedCheckboxList", new CommaDelimitedListViewModel() { FieldName = "AttorneyHearingTypes", CommaDelimitedList = Model.AttorneyHearingTypes, ListLookup = Model.HearingTypeLookup })
+                    @Html.ValidationMessageFor(model => model.AttorneyHearingTypes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // automatically format any numbers entered in phone number fields so they are in the format (###)###-####
+            $(".phoneNumber").keyup(function () {
+                $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "($1)$2-$3"))
+            });
+            $(".phoneNumber").change(function () {
+                var thisText = $(this).val();
+                thisText = thisText.replace(/[^\d]+/g, "");
+                if (thisText.length == 10) {
+                    var newText = "(" + thisText.substring(0, 3) + ")" + thisText.substring(3, 6) + "-" + thisText.substring(6, 10);
+                    $(this).val(newText);
+                }
+            });
+        });
+    </script>
+}

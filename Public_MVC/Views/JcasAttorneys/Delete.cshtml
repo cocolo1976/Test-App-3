@@ -1,0 +1,36 @@
+﻿@model FairfaxCounty.JCAS_Public_MVC.ViewModels.AttorneyHearingTypeViewModel
+@{
+    ViewBag.Title = "Delete Attorney";
+}
+
+<h2>@ViewBag.Title</h2>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+    }
+    else
+    {
+        <h3>Are you sure you want to delete this Attorney?</h3>
+
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div>
+                    <hr />
+                    @Html.Partial("_AttorneyDetails", Model.Attorney)
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Delete" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

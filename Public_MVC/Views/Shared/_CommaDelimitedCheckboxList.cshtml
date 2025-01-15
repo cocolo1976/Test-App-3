@@ -1,0 +1,27 @@
+﻿@using FairfaxCounty.JCAS_Public_MVC.ViewModels
+@model FairfaxCounty.JCAS_Public_MVC.ViewModels.CommaDelimitedListViewModel
+@Html.Hidden(Model.FieldName, Model.CommaDelimitedList)
+@foreach (string key in Model.ListLookup.Keys)
+{
+    bool isChecked = ("," + Model.CommaDelimitedList + ",").Contains("," + key + ",");
+    @Html.CheckBox("chk_" + Model.FieldName, isChecked, new { value = key, onclick = "click_" + Model.FieldName + "();" })
+    <text>&nbsp;</text>@Model.ListLookup[key];
+    <br />
+}
+
+<script>
+    function click_@(Model.FieldName)() {
+        var items = "";
+        var x = document.getElementsByName("chk_@(Model.FieldName)");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            if (x[i].type == "checkbox" && x[i].checked == true) {
+                if (items.length > 0) {
+                    items = items + ",";
+                }
+                items = items + x[i].value;
+            }
+        }
+        document.getElementById("@(Model.FieldName)").value = items;
+    }
+</script>

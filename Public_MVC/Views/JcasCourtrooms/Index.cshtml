@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasCourtroom>
+
+@{
+    ViewBag.Title = "Courtrooms";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table hidden-xs">
+    <tr>
+        <th>@Html.ActionLink("Create New", "Create")</th>
+        <th>
+            Courtroom
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Courtroom)
+        </td>
+    </tr>
+}
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @Html.ActionLink("Create New", "Create")
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.Courtroom)
+            </div>
+        </div>
+    }
+</div>

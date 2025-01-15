@@ -1,0 +1,20 @@
+@{ Layout = "_Layout.cshtml"; }
+@section scripts {
+    @RenderSection("scripts", required: false)
+}
+<div class="row">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="col-sm-4 col-md-3 col-lg-2">@Html.Partial("_AppSidebarNavLeft")</div>
+    }
+    else
+    {
+        <div class="col-sm-4 col-md-3 col-lg-2"></div>
+    }
+    <div class="col-sm-8 col-md-9 col-lg-10">@RenderBody()</div>
+    @* display the sidebar on the right *@
+    @*
+        <div class="col-sm-4 col-sm-push-8 col-md-3 col-md-push-9 col-lg-2 col-lg-push-10">@Html.Partial("_AppSidebarNavLeft")</div>
+        <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3 col-lg-10 col-lg-pull-2">@RenderBody()</div>
+    *@
+</div>

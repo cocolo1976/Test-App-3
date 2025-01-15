@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasCourtDateNote>
+
+@{
+    ViewBag.Title = "Court Date Notes";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Index", "JcasCourtDateNotes", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    if (!string.IsNullOrEmpty(ViewBag.MessageText))
+    {
+        <div class="alert-info">@Html.Raw(ViewBag.MessageText)</div>
+        <br />
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.DropDownList("selectedYear", new List<SelectListItem> (ViewBag.Years), htmlAttributes: new { @class = "form-control",
+               @title = "Select a year to display court date notes.", @onchange = "submit()" })
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table hidden-xs">
+    <tr>
+        <th>@Html.ActionLink("Create New", "Create")</th>
+        <th>
+            From Date
+        </th>
+        <th>
+            To Date
+        </th>
+        <th>
+            Display Order
+        </th>
+        <th>
+            Note
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+    </tr>
+    }
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @Html.ActionLink("Create New", "Create")
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.FromDate) <br />
+                @Html.DisplayFor(modelItem => item.ToDate) <br />
+                @Html.DisplayFor(modelItem => item.DisplayOrder) <br />
+                @Html.DisplayFor(modelItem => item.Note)
+            </div>
+        </div>
+    }
+</div>

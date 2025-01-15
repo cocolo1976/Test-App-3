@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FairfaxCounty.JCAS_Public_MVC.Models.JcasSetting>
+@{
+    ViewBag.Title = "Settings";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table hidden-xs">
+    <tr>
+        <th></th>
+        <th>
+            Setting Name
+        </th>
+        <th>
+            Setting Value
+        </th>
+        <th>
+            Label Text
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingLabelText)
+            </td>
+        </tr>
+    }
+</table>
+<div class="panel-group col-sm-12 visible-xs">
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(modelItem => item.SettingName) <br />
+                @Html.DisplayFor(modelItem => item.SettingValue) <br />
+                @Html.DisplayFor(modelItem => item.SettingLabelText) 
+            </div>
+        </div>
+    }
+</div>
